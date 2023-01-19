@@ -7,8 +7,9 @@ const jwt = require('jsonwebtoken');
 const { getUserById } = require('../db');
 const { JWT_SECRET } = process.env;
 
-const token = jwt.sign({ id: 1, username: 'albert' }, 'server secret');
+const token = jwt.sign({ id: 1, username: 'albert' }, process.env.JWT_SECRET);
 
+console.log("token: ",token)
 
 apiRouter.use((req, res, next) => {
     if (req.user) {
@@ -64,4 +65,4 @@ apiRouter.use((error, req, res, next) => {
   });
 
 
-module.exports = apiRouter, token;
+module.exports = apiRouter;
